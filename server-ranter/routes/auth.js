@@ -1,7 +1,9 @@
 const express = require("express"),
       router = express.Router(),
-      {signup} = require("../handlers/auth");
+      {signup, signin} = require("../handlers/auth");
 
 router.post("/signup", signup);
+router.post("/signin", signin);
+
 
 module.exports = router;

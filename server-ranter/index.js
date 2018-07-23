@@ -6,6 +6,8 @@ const express = require("express"),
       bodyParser = require("body-parser"),
       errorHandler = require("./handlers/error"),
       authRoutes = require("./routes/auth"),
+      messagesRoutes = require("./routes/messages"),
+      {loginRequired, ensureCorrectUser} = require("./middleware/auth"),
       PORT = 8081;
 
 
@@ -13,7 +15,23 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use("/api/auth", authRoutes);
-//all the routes here
+app.use("/api/users/:id/messages", loginRequired, ensureCorrectUser, messagesRoutes);
+
+app.get("/api/messages", loginRequired, async function(req, res, next){
+  try{
+    let messages = await db.Message.find()
+     .sort({createdAt: "desc"})
+     .populate("user", {
+       username: true,
+       profileImageUrl: true
+     });
+    return res.status(200).json(messages);
+  } catch(err) {
+    return next (err)
+  }
+})
+
+//all the routes above
 
 
 app.use(function(req, res, next) {
