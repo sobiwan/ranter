@@ -32,7 +32,7 @@ exports.signin = async function (req, res, next){
     } catch (e) {
         return next ({
             status: 400,
-            message: `Email/Password failed - the issue is ${e.message}`
+            message: `Invalid Email/Password`
         });
     }
     // checking if their password matches. what was sent to server
