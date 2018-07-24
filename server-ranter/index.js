@@ -8,6 +8,7 @@ const express = require("express"),
       authRoutes = require("./routes/auth"),
       messagesRoutes = require("./routes/messages"),
       {loginRequired, ensureCorrectUser} = require("./middleware/auth"),
+      db = require("./models"),
       PORT = 8081;
 
 
