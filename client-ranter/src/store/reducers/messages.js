@@ -6,6 +6,8 @@ const message = (state=[], action) => {
             return [...action.messages];
         default:
             return state;
+        case REMOVE_MESSAGE:
+            return state.filter(message => message._id !== action.id);
     }
 }
 

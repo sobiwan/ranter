@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import currentUser from "../store/reducers/currentUser";
 import {logout} from "../store/actions/auth";
 import Logo from "../images/ranter-logo.png"
 
@@ -21,9 +20,9 @@ class Navbar extends Component {
                         </Link>
                     </div>
                     {this.props.currentUser.isAuthenticated ? (
-                        <ul className="nav-navbar-nav navbar-right">
+                        <ul className="nav navbar-nav navbar-right">
                             <li>
-                                <Link to={`/users/${this.props.currentUser.id}/messages/new`}>New Rant</Link>
+                                <Link to={`/users/${this.props.currentUser.user.id}/messages/new`}>New Rant</Link>
                             </li>
                             <li>
                                 <a onClick={this.logout}>Log out</a>
